@@ -13,5 +13,8 @@
     "build"
   ],
   "author": "Maarten Staa <maartenstaa@gmail.com>",
-  "license": "BSD-3-Clause"
+  "license": "BSD-3-Clause",
+  "devDependencies": {
+    "typescript": "^2.9.2"
+  }
 }
