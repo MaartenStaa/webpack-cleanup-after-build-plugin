@@ -16,6 +16,14 @@ export interface WebpackCleanupAfterBuildPluginOptions {
   ignoreDotFiles: boolean
 }
 
+// This works around not being able to just use Partial<WebpackCleanupAfterBuildPluginOptions>,
+// because Typescript does not differentiate between missing and undefined properties.
+// e.g. for partial you could pass { filesToKeep: undefined }, which is not correct.
+export type WebpackCleanupAfterBuildPluginInputOptions =
+  Pick<WebpackCleanupAfterBuildPluginOptions, 'ignoreDotFiles'> |
+  Pick<WebpackCleanupAfterBuildPluginOptions, 'filesToKeep'> |
+  Pick<WebpackCleanupAfterBuildPluginOptions, 'ignoreDotFiles' | 'filesToKeep'>
+
 export class WebpackCleanupAfterBuildPlugin implements Plugin {
   /**
    * The options for this plugin.
@@ -27,7 +35,7 @@ export class WebpackCleanupAfterBuildPlugin implements Plugin {
    *
    * @param options Plugin options, optional.
    */
-  constructor (options?: Partial<WebpackCleanupAfterBuildPluginOptions>) {
+  constructor (options?: WebpackCleanupAfterBuildPluginInputOptions) {
     this.options = { filesToKeep: [], ignoreDotFiles: true, ...options }
   }
 

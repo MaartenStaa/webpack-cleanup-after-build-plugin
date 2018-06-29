@@ -11,6 +11,7 @@ export interface WebpackCleanupAfterBuildPluginOptions {
      */
     ignoreDotFiles: boolean;
 }
+export declare type WebpackCleanupAfterBuildPluginInputOptions = Pick<WebpackCleanupAfterBuildPluginOptions, 'ignoreDotFiles'> | Pick<WebpackCleanupAfterBuildPluginOptions, 'filesToKeep'> | Pick<WebpackCleanupAfterBuildPluginOptions, 'ignoreDotFiles' | 'filesToKeep'>;
 export declare class WebpackCleanupAfterBuildPlugin implements Plugin {
     /**
      * The options for this plugin.
@@ -21,7 +22,7 @@ export declare class WebpackCleanupAfterBuildPlugin implements Plugin {
      *
      * @param options Plugin options, optional.
      */
-    constructor(options?: Partial<WebpackCleanupAfterBuildPluginOptions>);
+    constructor(options?: WebpackCleanupAfterBuildPluginInputOptions);
     /**
      * Hook into the Webpack build process.
      *
