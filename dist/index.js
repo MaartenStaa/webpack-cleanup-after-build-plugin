@@ -1,14 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __assign = (this && this.__assign) || Object.assign || function(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
         s = arguments[i];
@@ -23,21 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
-var webpack_1 = require("webpack");
-var WebpackCleanupAfterBuildPlugin = /** @class */ (function (_super) {
-    __extends(WebpackCleanupAfterBuildPlugin, _super);
+var WebpackCleanupAfterBuildPlugin = /** @class */ (function () {
     /**
      * Constructor.
      *
      * @param options Plugin options, optional.
      */
     function WebpackCleanupAfterBuildPlugin(options) {
-        var _this = _super.call(this) || this;
+        var _this = this;
         /**
          * Called after a build, clean up all files in the output path which were not
          * the result of the given compilation.
          */
-        _this.cleanupFiles = function (compilation) {
+        this.cleanupFiles = function (compilation) {
             var outputPath = compilation.outputOptions.path;
             var assetList = Object.keys(compilation.assets)
                 .map(function (filename) { return path_1.default.join(outputPath, filename); })
@@ -48,8 +36,7 @@ var WebpackCleanupAfterBuildPlugin = /** @class */ (function (_super) {
             // in the asset list.
             _this.cleanupDirectory(outputPath, assetList);
         };
-        _this.options = __assign({ filesToKeep: [], ignoreDotFiles: true }, options);
-        return _this;
+        this.options = __assign({ filesToKeep: [], ignoreDotFiles: true }, options);
     }
     /**
      * Hook into the Webpack build process.
@@ -89,5 +76,5 @@ var WebpackCleanupAfterBuildPlugin = /** @class */ (function (_super) {
         }
     };
     return WebpackCleanupAfterBuildPlugin;
-}(webpack_1.Plugin));
+}());
 exports.WebpackCleanupAfterBuildPlugin = WebpackCleanupAfterBuildPlugin;

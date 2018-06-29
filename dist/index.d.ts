@@ -11,7 +11,7 @@ export interface WebpackCleanupAfterBuildPluginOptions {
      */
     ignoreDotFiles: boolean;
 }
-export declare class WebpackCleanupAfterBuildPlugin extends Plugin {
+export declare class WebpackCleanupAfterBuildPlugin implements Plugin {
     /**
      * The options for this plugin.
      */
