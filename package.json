@@ -4,6 +4,8 @@
   "description": "Cleans up files from the build folder left over from previous builds, e.g. in watch mode.",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
+    "lint": "tslint --project .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
