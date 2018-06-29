@@ -3,7 +3,16 @@ import path from 'path'
 import { compilation, Compiler, Plugin } from 'webpack'
 
 export interface WebpackCleanupAfterBuildOptions {
+  /**
+   * A list of files to never delete. If the paths are relative, they are assumed
+   * to be relative to Webpack's output path.
+   */
   filesToKeep: string[]
+
+  /**
+   * Whether to ignore dotfiles (files, or directories, whose name starts with a
+   * "."). Defaults to true.
+   */
   ignoreDotFiles: boolean
 }
 
