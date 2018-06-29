@@ -2,7 +2,8 @@
   "name": "webpack-cleanup-after-build-plugin",
   "version": "1.0.0",
   "description": "Cleans up files from the build folder left over from previous builds, e.g. in watch mode.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "lint": "tslint --project .",
