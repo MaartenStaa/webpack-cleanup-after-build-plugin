@@ -2,7 +2,27 @@ import fs from 'fs'
 import path from 'path'
 import { compilation, Compiler, Plugin } from 'webpack'
 
+export interface WebpackCleanupAfterBuildOptions {
+  ignoreDotFiles: boolean
+}
+
 export class WebpackCleanupAfterBuild extends Plugin {
+  /**
+   * The options for this plugin.
+   */
+  private options: WebpackCleanupAfterBuildOptions
+
+  /**
+   * Constructor.
+   *
+   * @param options Plugin options, optional.
+   */
+  constructor (options?: Partial<WebpackCleanupAfterBuildOptions>) {
+    super()
+
+    this.options = { ignoreDotFiles: true, ...options }
+  }
+
   /**
    * Hook into the Webpack build process.
    *
@@ -36,7 +56,7 @@ export class WebpackCleanupAfterBuild extends Plugin {
     fs.readdirSync(directory)
       .map(entry => {
         // Ignore dotfiles.
-        if (entry.startsWith('.')) {
+        if (this.options.ignoreDotFiles && entry.startsWith('.')) {
           return
         }
 

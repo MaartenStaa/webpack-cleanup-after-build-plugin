@@ -9,6 +9,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -18,8 +26,13 @@ var path_1 = __importDefault(require("path"));
 var webpack_1 = require("webpack");
 var WebpackCleanupAfterBuild = /** @class */ (function (_super) {
     __extends(WebpackCleanupAfterBuild, _super);
-    function WebpackCleanupAfterBuild() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
+    /**
+     * Constructor.
+     *
+     * @param options Plugin options, optional.
+     */
+    function WebpackCleanupAfterBuild(options) {
+        var _this = _super.call(this) || this;
         /**
          * Called after a build, clean up all files in the output path which were not
          * the result of the given compilation.
@@ -32,6 +45,7 @@ var WebpackCleanupAfterBuild = /** @class */ (function (_super) {
             // in the asset list.
             _this.cleanupDirectory(outputPath, assetList);
         };
+        _this.options = __assign({ ignoreDotFiles: true }, options);
         return _this;
     }
     /**
@@ -53,7 +67,7 @@ var WebpackCleanupAfterBuild = /** @class */ (function (_super) {
         fs_1.default.readdirSync(directory)
             .map(function (entry) {
             // Ignore dotfiles.
-            if (entry.startsWith('.')) {
+            if (_this.options.ignoreDotFiles && entry.startsWith('.')) {
                 return;
             }
             // Recurse if it's a directory.

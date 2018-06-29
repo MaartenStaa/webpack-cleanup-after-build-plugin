@@ -1,5 +1,18 @@
 import { compilation, Compiler, Plugin } from 'webpack';
+export interface WebpackCleanupAfterBuildOptions {
+    ignoreDotFiles: boolean;
+}
 export declare class WebpackCleanupAfterBuild extends Plugin {
+    /**
+     * The options for this plugin.
+     */
+    private options;
+    /**
+     * Constructor.
+     *
+     * @param options Plugin options, optional.
+     */
+    constructor(options?: Partial<WebpackCleanupAfterBuildOptions>);
     /**
      * Hook into the Webpack build process.
      *
