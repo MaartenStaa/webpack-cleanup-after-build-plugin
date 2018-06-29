@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { compilation, Compiler, Plugin } from 'webpack'
 
-export interface WebpackCleanupAfterBuildOptions {
+export interface WebpackCleanupAfterBuildPluginOptions {
   /**
    * A list of files to never delete. If the paths are relative, they are assumed
    * to be relative to Webpack's output path.
@@ -16,18 +16,18 @@ export interface WebpackCleanupAfterBuildOptions {
   ignoreDotFiles: boolean
 }
 
-export class WebpackCleanupAfterBuild extends Plugin {
+export class WebpackCleanupAfterBuildPlugin extends Plugin {
   /**
    * The options for this plugin.
    */
-  private options: WebpackCleanupAfterBuildOptions
+  private options: WebpackCleanupAfterBuildPluginOptions
 
   /**
    * Constructor.
    *
    * @param options Plugin options, optional.
    */
-  constructor (options?: Partial<WebpackCleanupAfterBuildOptions>) {
+  constructor (options?: Partial<WebpackCleanupAfterBuildPluginOptions>) {
     super()
 
     this.options = { filesToKeep: [], ignoreDotFiles: true, ...options }

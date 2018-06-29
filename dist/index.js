@@ -24,14 +24,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = __importDefault(require("fs"));
 var path_1 = __importDefault(require("path"));
 var webpack_1 = require("webpack");
-var WebpackCleanupAfterBuild = /** @class */ (function (_super) {
-    __extends(WebpackCleanupAfterBuild, _super);
+var WebpackCleanupAfterBuildPlugin = /** @class */ (function (_super) {
+    __extends(WebpackCleanupAfterBuildPlugin, _super);
     /**
      * Constructor.
      *
      * @param options Plugin options, optional.
      */
-    function WebpackCleanupAfterBuild(options) {
+    function WebpackCleanupAfterBuildPlugin(options) {
         var _this = _super.call(this) || this;
         /**
          * Called after a build, clean up all files in the output path which were not
@@ -56,7 +56,7 @@ var WebpackCleanupAfterBuild = /** @class */ (function (_super) {
      *
      * @param compiler The Webpack compiler.
      */
-    WebpackCleanupAfterBuild.prototype.apply = function (compiler) {
+    WebpackCleanupAfterBuildPlugin.prototype.apply = function (compiler) {
         compiler.hooks.afterEmit.tap('webpack-cleanup-after-build', this.cleanupFiles);
     };
     /**
@@ -65,7 +65,7 @@ var WebpackCleanupAfterBuild = /** @class */ (function (_super) {
      * @param directory The directory to scan.
      * @param assetList The whitelist of files (absolute paths) to keep.
      */
-    WebpackCleanupAfterBuild.prototype.cleanupDirectory = function (directory, assetList) {
+    WebpackCleanupAfterBuildPlugin.prototype.cleanupDirectory = function (directory, assetList) {
         var _this = this;
         fs_1.default.readdirSync(directory)
             .map(function (entry) {
@@ -88,6 +88,6 @@ var WebpackCleanupAfterBuild = /** @class */ (function (_super) {
             fs_1.default.rmdirSync(directory);
         }
     };
-    return WebpackCleanupAfterBuild;
+    return WebpackCleanupAfterBuildPlugin;
 }(webpack_1.Plugin));
-exports.WebpackCleanupAfterBuild = WebpackCleanupAfterBuild;
+exports.WebpackCleanupAfterBuildPlugin = WebpackCleanupAfterBuildPlugin;

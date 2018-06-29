@@ -1,5 +1,5 @@
 import { compilation, Compiler, Plugin } from 'webpack';
-export interface WebpackCleanupAfterBuildOptions {
+export interface WebpackCleanupAfterBuildPluginOptions {
     /**
      * A list of files to never delete. If the paths are relative, they are assumed
      * to be relative to Webpack's output path.
@@ -11,7 +11,7 @@ export interface WebpackCleanupAfterBuildOptions {
      */
     ignoreDotFiles: boolean;
 }
-export declare class WebpackCleanupAfterBuild extends Plugin {
+export declare class WebpackCleanupAfterBuildPlugin extends Plugin {
     /**
      * The options for this plugin.
      */
@@ -21,7 +21,7 @@ export declare class WebpackCleanupAfterBuild extends Plugin {
      *
      * @param options Plugin options, optional.
      */
-    constructor(options?: Partial<WebpackCleanupAfterBuildOptions>);
+    constructor(options?: Partial<WebpackCleanupAfterBuildPluginOptions>);
     /**
      * Hook into the Webpack build process.
      *
