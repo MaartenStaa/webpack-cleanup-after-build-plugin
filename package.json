@@ -15,8 +15,13 @@
   "author": "Maarten Staa <maartenstaa@gmail.com>",
   "license": "BSD-3-Clause",
   "devDependencies": {
+    "@types/webpack": "^4.4.4",
     "tslint": "^5.10.0",
     "tslint-config-standard": "^7.1.0",
-    "typescript": "^2.9.2"
+    "typescript": "^2.9.2",
+    "webpack": "^4.12.2"
+  },
+  "peerDependencies": {
+    "webpack": "4"
   }
 }
