@@ -1,5 +1,6 @@
 import { compilation, Compiler, Plugin } from 'webpack';
 export interface WebpackCleanupAfterBuildOptions {
+    filesToKeep: string[];
     ignoreDotFiles: boolean;
 }
 export declare class WebpackCleanupAfterBuild extends Plugin {

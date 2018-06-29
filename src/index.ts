@@ -3,6 +3,7 @@ import path from 'path'
 import { compilation, Compiler, Plugin } from 'webpack'
 
 export interface WebpackCleanupAfterBuildOptions {
+  filesToKeep: string[]
   ignoreDotFiles: boolean
 }
 
@@ -20,7 +21,7 @@ export class WebpackCleanupAfterBuild extends Plugin {
   constructor (options?: Partial<WebpackCleanupAfterBuildOptions>) {
     super()
 
-    this.options = { ignoreDotFiles: true, ...options }
+    this.options = { filesToKeep: [], ignoreDotFiles: true, ...options }
   }
 
   /**
@@ -40,6 +41,9 @@ export class WebpackCleanupAfterBuild extends Plugin {
     const outputPath = compilation.outputOptions.path
     const assetList = Object.keys(compilation.assets)
       .map((filename: string): string => path.join(outputPath, filename))
+      .concat(this.options.filesToKeep.map(fileToKeep =>
+        path.isAbsolute(fileToKeep) ? fileToKeep : path.join(outputPath, fileToKeep)
+      ))
 
     // Now we just walk the tree from the output path, and remove the files not
     // in the asset list.

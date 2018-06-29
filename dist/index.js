@@ -40,12 +40,15 @@ var WebpackCleanupAfterBuild = /** @class */ (function (_super) {
         _this.cleanupFiles = function (compilation) {
             var outputPath = compilation.outputOptions.path;
             var assetList = Object.keys(compilation.assets)
-                .map(function (filename) { return path_1.default.join(outputPath, filename); });
+                .map(function (filename) { return path_1.default.join(outputPath, filename); })
+                .concat(_this.options.filesToKeep.map(function (fileToKeep) {
+                return path_1.default.isAbsolute(fileToKeep) ? fileToKeep : path_1.default.join(outputPath, fileToKeep);
+            }));
             // Now we just walk the tree from the output path, and remove the files not
             // in the asset list.
             _this.cleanupDirectory(outputPath, assetList);
         };
-        _this.options = __assign({ ignoreDotFiles: true }, options);
+        _this.options = __assign({ filesToKeep: [], ignoreDotFiles: true }, options);
         return _this;
     }
     /**
