@@ -23,7 +23,7 @@
     "tslint": "^5.10.0",
     "tslint-config-standard": "^7.1.0",
     "typescript": "^2.9.2",
-    "webpack": "^4.12.2"
+    "webpack": "^5.75.0"
   },
   "peerDependencies": {
     "webpack": "4"
